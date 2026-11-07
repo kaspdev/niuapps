@@ -62,7 +62,7 @@
 
 ## Блокеры
 
-1. Извлечь и проверить содержимое ZIP 1.3.2 либо получить свежий полный исходный проект.
+1. Импортировать проверенный ZIP 1.3.3 в release/1.3.3: сохранить архив и добавить распакованные исходники.
 2. Получить stacktrace экрана Admin/Keys, если он не воспроизводится по исходникам.
 3. Для проверки BLE/network pairing потребуется Android-устройство.
 4. Для подписанных Release APK нужны пользовательские signing secrets; значения секретов не публиковать.
@@ -107,3 +107,13 @@
 - Новый архив NIU_Mobility_Studio_1.3.3_BUILD_ACCOUNTS.zip получен в чате, но его содержимое пока не проинспектировано из-за временного ограничения инструмента анализа файлов. Поэтому архив не загружен и исходники из него не опубликованы.
 - Статус: ветка подготовки создана; импорт архива и проверка исходников заблокированы до доступности анализа ZIP.
 - Доказательство: ветка https://github.com/kaspdev/niuapps/tree/release/1.3.3; исходный main commit 4631a567c79561f9650feac4f533d1251c58a170.
+
+
+### 2026-11-07 — повторная проверка архива 1.3.3
+- Получен и прочитан файл NIU_Mobility_Studio_1.3.3_BUILD_ACCOUNTS.zip: 659 672 байта; SHA-256: a933fcbdece26b01858682e00ba2f959297bf7a47e1cae046b54027222677405.
+- Проверка ZIP: ошибок CRC/структуры не обнаружено; 212 записей, из них 143 файла.
+- В архиве обнаружены модули app/ и niu-sdk/, unit tests, product flavors full/user, GitHub Device Flow, SecureSecretStore, Admin Console, workflow .github/workflows/android-build.yml и релизная документация 1.3.3.
+- Проверки: оба shell build scripts прошли bash -n; android-build.yml успешно разобран YAML-парсером. В текущей среде отсутствуют Gradle, Gradle Wrapper, Android SDK и kotlinc; APK и Kotlin/Android tests не собраны.
+- Важное замечание: Gradle Wrapper (gradlew/gradlew.bat и gradle/wrapper) в архиве не найден. Workflow использует установленный Gradle 8.9. Автозапуск push настроен только для main/master; для release/1.3.3 предусмотрен ручной workflow_dispatch.
+- Статус: архив проверен; импорт в GitHub ещё не выполнен. Ветка release/1.3.3 создана от main; main не изменялся.
+- Доказательство: SHA-256 выше; локальные проверки ZIP, bash -n и YAML parse.
